@@ -2,7 +2,7 @@
 
 ## setup migration
 
-```
-	cd protype_database.Dal
-	dotnet ef database update
-```
+open solution in Visual Studio
+build the whole solution
+open Package Manager Console
+run ```update-database```
