@@ -15,6 +15,10 @@ namespace prototype_database.AppService
             services.AddTransient<IUserService, FullUserService>();
             services.AddTransient<IUserService, LightUserService>();
 
+            services.AddTransient<IOrganizationService, OrganizationService>();
+            services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IRoleService, RoleService>();
+
             services.AddTransient<Func<ServiceType, IUserService>>(serviceProvider => key =>
             {
                 switch (key)

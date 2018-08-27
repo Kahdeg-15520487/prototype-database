@@ -19,8 +19,9 @@ namespace prototype_database.Contract
         /// Create a new user, user's id will be generated
         /// </summary>
         /// <param name="dto">user's info</param>
+        /// <param name="id">user's id</param>
         /// <returns>user's id if success, else the error message</returns>
-        string Create(UserDTO dto);
+        string Create(UserDTO dto,string id);
         /// <summary>
         /// Update a user's info
         /// </summary>

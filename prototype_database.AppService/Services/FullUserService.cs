@@ -8,6 +8,7 @@ using prototype_database.Contract;
 using prototype_database.Contract.DTOs;
 using prototype_database.Dal;
 using Newtonsoft.Json;
+using prototype_database.AppService.Utility;
 
 namespace prototype_database.AppService.Services
 {
@@ -29,11 +30,7 @@ namespace prototype_database.AppService.Services
                         Id = user.Id,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
-                        Organization = new OrganizationDTO()
-                        {
-                            Id = user.Organization.Id.ToString(),
-                            Name = user.Organization.Name
-                        },
+                        Organization = Mapper.Map(user.Organization),
                         Email = JsonConvert.DeserializeObject<Email>(user.Email),
                         Phone = JsonConvert.DeserializeObject<Phone>(user.Phone),
                         Mobile = JsonConvert.DeserializeObject<Mobile>(user.Mobile)
@@ -49,41 +46,20 @@ namespace prototype_database.AppService.Services
                              join us in _context.Users on usgr.UserId equals us.Id
                              select new { Group = gr, isMain = usgr.IsMain };
 
-                user.Groups = groups.Select(gr =>
-                        new GroupDTO()
-                        {
-                            Id = gr.Group.Id.ToString(),
-                            Name = gr.Group.Name
-                        }
-                        ).ToArray();
+                user.Groups = groups.Select(group => Mapper.Map(group.Group)).ToArray();
 
                 var mainGroup = groups.First(g => g.isMain).Group;
-                user.MainGroup = new GroupDTO()
-                {
-                    Id = mainGroup.Id.ToString(),
-                    Name = mainGroup.Name
-                };
+                user.MainGroup = Mapper.Map(mainGroup);
 
                 var roles = from role in _context.Roles
                             join usrl in _context.UserRoles on role.Id equals usrl.RoleId
                             join us in _context.Users on usrl.UserId equals us.Id
                             select new { role, isMain = usrl.IsMain };
 
-                user.Roles = roles.Select((role) =>
-                        new RoleDTO()
-                        {
-                            Id = role.role.Id.ToString(),
-                            Name = role.role.Name
-                        }
-                        )
-                        .ToArray();
+                user.Roles = roles.Select(role => Mapper.Map(role.role)).ToArray();
 
                 var mainRole = roles.First(r => r.isMain).role;
-                user.MainRole = new RoleDTO()
-                {
-                    Id = mainRole.Id.ToString(),
-                    Name = mainRole.Name
-                };
+                user.MainRole = Mapper.Map(mainRole);
 
                 return user;
             });
@@ -101,11 +77,7 @@ namespace prototype_database.AppService.Services
                     Id = usr.Id,
                     FirstName = usr.FirstName,
                     LastName = usr.LastName,
-                    Organization = new OrganizationDTO()
-                    {
-                        Id = usr.Organization.Id.ToString(),
-                        Name = usr.Organization.Name
-                    },
+                    Organization = Mapper.Map(usr.Organization),
                     Email = JsonConvert.DeserializeObject<Email>(usr.Email),
                     Phone = JsonConvert.DeserializeObject<Phone>(usr.Phone),
                     Mobile = JsonConvert.DeserializeObject<Mobile>(usr.Mobile)
@@ -126,52 +98,31 @@ namespace prototype_database.AppService.Services
                          join us in _context.Users on usgr.UserId equals us.Id
                          select new { Group = gr, isMain = usgr.IsMain };
 
-            user.Groups = groups.Select(gr =>
-                    new GroupDTO()
-                    {
-                        Id = gr.Group.Id.ToString(),
-                        Name = gr.Group.Name
-                    }
-                    ).ToArray();
+            user.Groups = groups.Select(gr => Mapper.Map(gr.Group)).ToArray();
 
             var mainGroup = groups.First(g => g.isMain).Group;
-            user.MainGroup = new GroupDTO()
-            {
-                Id = mainGroup.Id.ToString(),
-                Name = mainGroup.Name
-            };
+            user.MainGroup = Mapper.Map(mainGroup);
 
             var roles = from role in _context.Roles
                         join usrl in _context.UserRoles on role.Id equals usrl.RoleId
                         join us in _context.Users on usrl.UserId equals us.Id
                         select new { role, isMain = usrl.IsMain };
 
-            user.Roles = roles.Select((role) =>
-                    new RoleDTO()
-                    {
-                        Id = role.role.Id.ToString(),
-                        Name = role.role.Name
-                    }
-                    )
-                    .ToArray();
+            user.Roles = roles.Select(role => Mapper.Map(role.role)).ToArray();
 
             var mainRole = roles.First(r => r.isMain).role;
-            user.MainRole = new RoleDTO()
-            {
-                Id = mainRole.Id.ToString(),
-                Name = mainRole.Name
-            };
+            user.MainRole = Mapper.Map(mainRole);
 
             return user;
         }
 
-        public string Create(UserDTO dto)
+        public string Create(UserDTO dto, string id)
         {
-            var id = dto.Id;
+            dto.Id = id;
 
             if (_context.Users.FirstOrDefault(u => u.Id.Equals(id)) != null)
             {
-                return null;
+                throw new ArgumentException($"{id} already existed");
             }
 
             var orgid = Guid.Parse(dto.Organization.Id);
@@ -180,19 +131,25 @@ namespace prototype_database.AppService.Services
             Organization org = _context.Organizations.FirstOrDefault(o => o.Id.Equals(orgid));
             if (org == null)
             {
-                return null;
+                throw new ArgumentException($"organization {id} does not exist");
             }
 
             //check all group exist
-            if (!dto.Groups.All(groupDto => _context.Groups.FirstOrDefault(gr => groupDto.Id.Equals(gr.Id.ToString())) != null))
+            foreach (var groupDto in dto.Groups)
             {
-                return null;
+                if (_context.Groups.FirstOrDefault(gr => groupDto.Id.Equals(gr.Id.ToString())) == null)
+                {
+                    throw new ArgumentException($"group {groupDto} does not exist");
+                }
             }
 
             //check all role exist
-            if (!dto.Roles.All(roleDto => _context.Roles.FirstOrDefault(rl => roleDto.Id.Equals(rl.Id.ToString())) != null))
+            foreach (var roleDto in dto.Roles)
             {
-                return null;
+                if (_context.Roles.FirstOrDefault(rl => roleDto.Id.Equals(rl.Id.ToString())) == null)
+                {
+                    throw new ArgumentException($"role {roleDto} does not exist");
+                }
             }
 
             var userGroups = (

@@ -76,7 +76,7 @@ namespace prototype_database.AppService.Services
             return user;
         }
 
-        public string Create(UserDTO dto)
+        public string Create(UserDTO dto,string id)
         {
             throw new NotImplementedException();
         }
