@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.AppService", "prototype_database.AppService\prototype_database.AppService.csproj", "{E40EFDBB-B799-47E3-9D05-50AE634EA79D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.AppService", "prototype_database.AppService\prototype_database.AppService.csproj", "{E40EFDBB-B799-47E3-9D05-50AE634EA79D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.AppServiceMock", "prototype_database.AppServiceMock\prototype_database.AppServiceMock.csproj", "{2B8B46F0-2305-4CF2-BE42-1DE293740C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.AppServiceMock", "prototype_database.AppServiceMock\prototype_database.AppServiceMock.csproj", "{2B8B46F0-2305-4CF2-BE42-1DE293740C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.Contract", "prototype_database.Contract\prototype_database.Contract.csproj", "{8DBF4188-A47C-45FF-A638-24CD094B72ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.Contract", "prototype_database.Contract\prototype_database.Contract.csproj", "{8DBF4188-A47C-45FF-A638-24CD094B72ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.Dal", "prototype_database.Dal\prototype_database.Dal.csproj", "{7310A6BD-BAE6-471A-BC0C-E119FE129641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.Dal", "prototype_database.Dal\prototype_database.Dal.csproj", "{7310A6BD-BAE6-471A-BC0C-E119FE129641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.Startup", "prototype_database.Startup\prototype_database.Startup.csproj", "{ACAFA80A-A18B-40A4-AAF0-324F1ACE3010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.Startup", "prototype_database.Startup\prototype_database.Startup.csproj", "{ACAFA80A-A18B-40A4-AAF0-324F1ACE3010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.WebApi", "prototype_database.WebApi\prototype_database.WebApi.csproj", "{EB91F912-0AE0-4F24-BFA2-88275E4DC54B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "prototype_database.WebApi", "prototype_database.WebApi\prototype_database.WebApi.csproj", "{EB91F912-0AE0-4F24-BFA2-88275E4DC54B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5ED9FB41-3DFA-4ED5-8762-F9054E839B16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prototype_database.AppService.Test", "prototype_database.AppService.Test\prototype_database.AppService.Test.csproj", "{8B191D04-064C-4510-885B-1A267C5722C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E40EFDBB-B799-47E3-9D05-50AE634EA79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -100,5 +101,26 @@ Global
 		{EB91F912-0AE0-4F24-BFA2-88275E4DC54B}.Release|x64.Build.0 = Release|Any CPU
 		{EB91F912-0AE0-4F24-BFA2-88275E4DC54B}.Release|x86.ActiveCfg = Release|Any CPU
 		{EB91F912-0AE0-4F24-BFA2-88275E4DC54B}.Release|x86.Build.0 = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|x64.Build.0 = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B191D04-064C-4510-885B-1A267C5722C3}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B191D04-064C-4510-885B-1A267C5722C3} = {5ED9FB41-3DFA-4ED5-8762-F9054E839B16}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B3E93B2-F315-4AAD-885F-66FF3037AC23}
 	EndGlobalSection
 EndGlobal

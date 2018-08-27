@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\prototype_database.Dal\prototype_database.Dal.csproj" />
     <ProjectReference Include="..\prototype_database.Contract\prototype_database.Contract.csproj" />
   </ItemGroup>
