@@ -173,7 +173,7 @@ namespace prototype_database.AppService.Services
                     Id = Guid.NewGuid(),
                     RoleId = rl.Id,
                     UserId = id,
-                    IsMain = dto.MainGroup.Id.Equals(rl.Id.ToString())
+                    IsMain = dto.MainRole.Id.Equals(rl.Id.ToString())
                 })
             .ToArray()
             ;
