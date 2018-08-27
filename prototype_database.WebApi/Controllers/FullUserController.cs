@@ -10,27 +10,25 @@ namespace prototype_database.WebApi.Controllers
     [Route("api/user/full")]
     public class FullUserController : Controller
     {
-        private readonly Func<ServiceType, IUserService> _serviceAccessor;
+        private readonly IUserService _service;
         private readonly IRandomIdGenerator _randomIdGenerator;
 
-        public FullUserController(Func<ServiceType, IUserService> serviceAccessor, IRandomIdGenerator randomIdGenerator)
+        public FullUserController(IUserService service, IRandomIdGenerator randomIdGenerator)
         {
-            _serviceAccessor = serviceAccessor;
+            _service = service;
             _randomIdGenerator = randomIdGenerator;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var service = _serviceAccessor(ServiceType.Full);
-            return Json(service.GetUsers());
+            return Json(_service.GetUsers());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetUser(string id)
         {
-            var service = _serviceAccessor(ServiceType.Full);
-            var user = service.GetUser(id);
+            var user = _service.GetUser(id);
 
             if (user == null)
             {
@@ -43,12 +41,11 @@ namespace prototype_database.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateUser([FromBody] UserDTO dto)
         {
-            var service = _serviceAccessor(ServiceType.Full);
             var id = _randomIdGenerator.GetId(5);
             string result = null;
             try
             {
-                result = service.Create(dto, id);
+                result = _service.Create(dto, id);
             }
             catch (ArgumentException aex)
             {
@@ -66,8 +63,7 @@ namespace prototype_database.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(string id)
         {
-            var service = _serviceAccessor(ServiceType.Full);
-            var result = service.Delete(id);
+            var result = _service.Delete(id);
             if (result)
             {
                 return Ok(id);

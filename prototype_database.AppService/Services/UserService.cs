@@ -12,11 +12,11 @@ using prototype_database.AppService.Utility;
 
 namespace prototype_database.AppService.Services
 {
-    internal class FullUserService : IUserService
+    internal class UserService : IUserService
     {
         private readonly UserDbContext _context;
 
-        public FullUserService(UserDbContext context)
+        public UserService(UserDbContext context)
         {
             _context = context;
         }
@@ -67,6 +67,26 @@ namespace prototype_database.AppService.Services
             return users;
         }
 
+        public ICollection<UserDTO> GetLightUsers()
+        {
+            return
+            _context.Users
+                .Select((user) =>
+                    new UserDTO
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Organization = Mapper.Map(user.Organization),
+                        Email = JsonConvert.DeserializeObject<Email>(user.Email),
+                        Phone = JsonConvert.DeserializeObject<Phone>(user.Phone),
+                        Mobile = JsonConvert.DeserializeObject<Mobile>(user.Mobile)
+                    }
+                )
+                .ToList()
+                ;
+        }
+
         public UserDTO GetUser(string id)
         {
             var users = (
@@ -112,6 +132,35 @@ namespace prototype_database.AppService.Services
 
             var mainRole = roles.First(r => r.isMain).role;
             user.MainRole = Mapper.Map(mainRole);
+
+            return user;
+        }
+
+        public UserDTO GetLightUser(string id)
+        {
+            var users = (
+                from usr in _context.Users.Include(u => u.Organization)
+                where usr.Id.Equals(id)
+                select new UserDTO
+                {
+                    Id = usr.Id,
+                    FirstName = usr.FirstName,
+                    LastName = usr.LastName,
+                    Organization = Mapper.Map(usr.Organization),
+                    Email = JsonConvert.DeserializeObject<Email>(usr.Email),
+                    Phone = JsonConvert.DeserializeObject<Phone>(usr.Phone),
+                    Mobile = JsonConvert.DeserializeObject<Mobile>(usr.Mobile)
+                }
+                )
+                .ToList()
+                ;
+
+            if (users.Count == 0)
+            {
+                return null;
+            }
+
+            var user = users[0];
 
             return user;
         }

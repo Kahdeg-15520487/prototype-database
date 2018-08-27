@@ -10,26 +10,25 @@ namespace prototype_database.WebApi.Controllers
     [Route("api/user/light")]
     public class LightUserController : Controller
     {
-        private readonly Func<ServiceType, IUserService> _serviceAccessor;
+        private readonly IUserService _service;
         private readonly IRandomIdGenerator _randomIdGenerator;
 
-        public LightUserController(Func<ServiceType, IUserService> serviceAccessor, IRandomIdGenerator randomIdGenerator)
+        public LightUserController(IUserService service, IRandomIdGenerator randomIdGenerator)
         {
-            _serviceAccessor = serviceAccessor;
+            _service = service;
             _randomIdGenerator = randomIdGenerator;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(_serviceAccessor(ServiceType.Light).GetUsers());
+            return Json(_service.GetLightUsers());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetUser(string id)
         {
-            var service = _serviceAccessor(ServiceType.Light);
-            var user = service.GetUser(id);
+            var user = _service.GetLightUser(id);
 
             if (user == null)
             {

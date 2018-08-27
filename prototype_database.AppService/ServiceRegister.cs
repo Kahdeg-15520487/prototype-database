@@ -13,31 +13,11 @@ namespace prototype_database.AppService
     {
         public static IServiceCollection AddUserService(this IServiceCollection services)
         {
-            services.AddTransient<IUserService, FullUserService>();
-            services.AddTransient<IUserService, LightUserService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IRoleService, RoleService>();
-
-            services.AddTransient<Func<ServiceType, IUserService>>(serviceProvider => key =>
-            {
-                switch (key)
-                {
-                    case ServiceType.Full:
-                        {
-                            var service = serviceProvider.GetServices<IUserService>().FirstOrDefault(s => s.GetType().Equals(typeof(FullUserService)));
-                            return service;
-                        }
-                    case ServiceType.Light:
-                        {
-                            var service = serviceProvider.GetServices<IUserService>().FirstOrDefault(s => s.GetType().Equals(typeof(LightUserService)));
-                            return service;
-                        }
-                    default:
-                        throw new KeyNotFoundException();
-                }
-            });
 
             services.AddSingleton<IRandomIdGenerator, RandomIdGenerator>();
 
