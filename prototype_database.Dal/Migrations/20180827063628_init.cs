@@ -107,8 +107,8 @@ namespace prototype_database.Dal.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23"), "Rosen" },
-                    { new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716"), "UIT" }
+                    { new Guid("a316c1e5-5521-487a-8588-d5c8c0014467"), "Rosen" },
+                    { new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a"), "UIT" }
                 });
 
             migrationBuilder.InsertData(
@@ -116,9 +116,9 @@ namespace prototype_database.Dal.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("d734e870-882d-44a2-9578-f8b08c5a37ce"), "Technical Lead" },
-                    { new Guid("2dbf08ad-b4b9-4e88-b253-6b969d879b68"), "HR Lead" },
-                    { new Guid("4b388280-17f5-43c6-aea7-2de535bb3003"), "Engineer" }
+                    { new Guid("6424b41c-136f-4347-ac47-18a672fad8e0"), "Technical Lead" },
+                    { new Guid("4b7a6ca9-03c0-4e2c-a856-f05e87a95e31"), "HR Lead" },
+                    { new Guid("03ffbf68-6df8-4ea5-a2b3-101e865d34a9"), "Engineer" }
                 });
 
             migrationBuilder.InsertData(
@@ -126,10 +126,10 @@ namespace prototype_database.Dal.Migrations
                 columns: new[] { "Id", "Name", "OrganizationId" },
                 values: new object[,]
                 {
-                    { new Guid("f75ff792-e7af-4653-b400-06598caccb64"), "Technical", new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23") },
-                    { new Guid("f81948f0-6341-4837-b272-b7cabf245ddd"), "HR", new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23") },
-                    { new Guid("16209a73-9842-42f6-abce-50097e7dfbdc"), "SoftwareEngineer", new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716") },
-                    { new Guid("50010527-2c8a-4f9a-9f7d-11c5559f82f1"), "ComputerEngineer", new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716") }
+                    { new Guid("3e88800d-17b1-4de3-aecc-a4a3960ff059"), "Technical", new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
+                    { new Guid("3776f864-6f67-4e75-b79b-8dc66ef1c79a"), "HR", new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
+                    { new Guid("14c5836f-285b-4f10-b3c3-03f35aa84146"), "SoftwareEngineer", new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") },
+                    { new Guid("f13be28b-8509-408e-841d-03d900d73435"), "ComputerEngineer", new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") }
                 });
 
             migrationBuilder.CreateIndex(

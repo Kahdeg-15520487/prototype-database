@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using prototype_database.AppService;
 using prototype_database.Dal;
 using System;
 
@@ -27,6 +28,8 @@ namespace prototype_database.Startup
                             Configuration["ConnectionStrings:DefaultConnection"]
                         )
                 );
+
+            services.AddUserService();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

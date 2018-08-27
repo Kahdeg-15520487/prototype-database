@@ -8,7 +8,7 @@ namespace prototype_database.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/user/light")]
-    class LightUserController : Controller
+    public class LightUserController : Controller
     {
         private readonly Func<ServiceType, IUserService> _serviceAccessor;
         private readonly IRandomIdGenerator _randomIdGenerator;

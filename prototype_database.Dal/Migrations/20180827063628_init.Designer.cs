@@ -10,7 +10,7 @@ using prototype_database.Dal;
 namespace prototype_database.Dal.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180827023426_init")]
+    [Migration("20180827063628_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,10 +37,10 @@ namespace prototype_database.Dal.Migrations
                     b.ToTable("Groups");
 
                     b.HasData(
-                        new { Id = new Guid("f75ff792-e7af-4653-b400-06598caccb64"), Name = "Technical", OrganizationId = new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23") },
-                        new { Id = new Guid("f81948f0-6341-4837-b272-b7cabf245ddd"), Name = "HR", OrganizationId = new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23") },
-                        new { Id = new Guid("16209a73-9842-42f6-abce-50097e7dfbdc"), Name = "SoftwareEngineer", OrganizationId = new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716") },
-                        new { Id = new Guid("50010527-2c8a-4f9a-9f7d-11c5559f82f1"), Name = "ComputerEngineer", OrganizationId = new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716") }
+                        new { Id = new Guid("3e88800d-17b1-4de3-aecc-a4a3960ff059"), Name = "Technical", OrganizationId = new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
+                        new { Id = new Guid("3776f864-6f67-4e75-b79b-8dc66ef1c79a"), Name = "HR", OrganizationId = new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
+                        new { Id = new Guid("14c5836f-285b-4f10-b3c3-03f35aa84146"), Name = "SoftwareEngineer", OrganizationId = new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") },
+                        new { Id = new Guid("f13be28b-8509-408e-841d-03d900d73435"), Name = "ComputerEngineer", OrganizationId = new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") }
                     );
                 });
 
@@ -56,8 +56,8 @@ namespace prototype_database.Dal.Migrations
                     b.ToTable("Organizations");
 
                     b.HasData(
-                        new { Id = new Guid("9c393d2a-0f35-40bf-8a9c-59733c581f23"), Name = "Rosen" },
-                        new { Id = new Guid("35c125a5-c693-4eee-a6c9-155dd0b8f716"), Name = "UIT" }
+                        new { Id = new Guid("a316c1e5-5521-487a-8588-d5c8c0014467"), Name = "Rosen" },
+                        new { Id = new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a"), Name = "UIT" }
                     );
                 });
 
@@ -73,9 +73,9 @@ namespace prototype_database.Dal.Migrations
                     b.ToTable("Roles");
 
                     b.HasData(
-                        new { Id = new Guid("d734e870-882d-44a2-9578-f8b08c5a37ce"), Name = "Technical Lead" },
-                        new { Id = new Guid("2dbf08ad-b4b9-4e88-b253-6b969d879b68"), Name = "HR Lead" },
-                        new { Id = new Guid("4b388280-17f5-43c6-aea7-2de535bb3003"), Name = "Engineer" }
+                        new { Id = new Guid("6424b41c-136f-4347-ac47-18a672fad8e0"), Name = "Technical Lead" },
+                        new { Id = new Guid("4b7a6ca9-03c0-4e2c-a856-f05e87a95e31"), Name = "HR Lead" },
+                        new { Id = new Guid("03ffbf68-6df8-4ea5-a2b3-101e865d34a9"), Name = "Engineer" }
                     );
                 });
 

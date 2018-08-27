@@ -7,7 +7,7 @@ namespace prototype_database.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    class RoleController : Controller
+    public class RoleController : Controller
     {
         private readonly IRoleService _service;
 

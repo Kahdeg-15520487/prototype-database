@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using prototype_database.AppService.Utility;
 using prototype_database.Contract;
 using prototype_database.Contract.DTOs;
 using prototype_database.Dal;
@@ -29,11 +30,7 @@ namespace prototype_database.AppService.Services
                         Id = user.Id,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
-                        Organization = new OrganizationDTO()
-                        {
-                            Id = user.Organization.Id.ToString(),
-                            Name = user.Organization.Name
-                        },
+                        Organization = Mapper.Map(user.Organization),
                         Email = JsonConvert.DeserializeObject<Email>(user.Email),
                         Phone = JsonConvert.DeserializeObject<Phone>(user.Phone),
                         Mobile = JsonConvert.DeserializeObject<Mobile>(user.Mobile)
@@ -53,11 +50,7 @@ namespace prototype_database.AppService.Services
                     Id = usr.Id,
                     FirstName = usr.FirstName,
                     LastName = usr.LastName,
-                    Organization = new OrganizationDTO()
-                    {
-                        Id = usr.Organization.Id.ToString(),
-                        Name = usr.Organization.Name
-                    },
+                    Organization = Mapper.Map(usr.Organization),
                     Email = JsonConvert.DeserializeObject<Email>(usr.Email),
                     Phone = JsonConvert.DeserializeObject<Phone>(usr.Phone),
                     Mobile = JsonConvert.DeserializeObject<Mobile>(usr.Mobile)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ namespace prototype_database.AppService
 {
     public static class ServiceRegister
     {
-        public static IServiceCollection RegisterUserService(this IServiceCollection services)
+        public static IServiceCollection AddUserService(this IServiceCollection services)
         {
             services.AddTransient<IUserService, FullUserService>();
             services.AddTransient<IUserService, LightUserService>();
@@ -24,9 +25,15 @@ namespace prototype_database.AppService
                 switch (key)
                 {
                     case ServiceType.Full:
-                        return serviceProvider.GetService<FullUserService>();
+                        {
+                            var service = serviceProvider.GetServices<IUserService>().FirstOrDefault(s => s.GetType().Equals(typeof(FullUserService)));
+                            return service;
+                        }
                     case ServiceType.Light:
-                        return serviceProvider.GetService<LightUserService>();
+                        {
+                            var service = serviceProvider.GetServices<IUserService>().FirstOrDefault(s => s.GetType().Equals(typeof(LightUserService)));
+                            return service;
+                        }
                     default:
                         throw new KeyNotFoundException();
                 }

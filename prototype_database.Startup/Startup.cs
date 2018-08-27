@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using prototype_database.AppService;
 using prototype_database.Dal;
 
 namespace prototype_database.Startup
@@ -33,6 +34,8 @@ namespace prototype_database.Startup
                             Configuration["ConnectionStrings:DefaultConnection"]
                         )
                 );
+
+            services.AddUserService();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

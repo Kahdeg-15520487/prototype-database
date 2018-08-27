@@ -8,7 +8,7 @@ namespace prototype_database.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/user/full")]
-    class FullUserController : Controller
+    public class FullUserController : Controller
     {
         private readonly Func<ServiceType, IUserService> _serviceAccessor;
         private readonly IRandomIdGenerator _randomIdGenerator;
@@ -22,7 +22,8 @@ namespace prototype_database.WebApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(_serviceAccessor(ServiceType.Full).GetUsers());
+            var service = _serviceAccessor(ServiceType.Full);
+            return Json(service.GetUsers());
         }
 
         [HttpGet("{id}")]

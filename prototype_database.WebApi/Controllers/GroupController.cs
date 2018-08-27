@@ -7,7 +7,7 @@ namespace prototype_database.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    class GroupController : Controller
+    public class GroupController : Controller
     {
         private readonly IGroupService _service;
 

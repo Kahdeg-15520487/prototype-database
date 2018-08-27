@@ -167,7 +167,7 @@ namespace prototype_database.AppService.Services
 
             var userRoles = (
                 from rl in _context.Roles
-                where dto.Groups.FirstOrDefault(gDto => gDto.Id.Equals(rl.Id.ToString())) != null
+                where dto.Roles.FirstOrDefault(rDto => rDto.Id.Equals(rl.Id.ToString())) != null
                 select new UserRole()
                 {
                     Id = Guid.NewGuid(),

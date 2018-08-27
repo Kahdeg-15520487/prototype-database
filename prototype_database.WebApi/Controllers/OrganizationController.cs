@@ -7,7 +7,7 @@ namespace prototype_database.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    class OrganizationController : Controller
+    public class OrganizationController : Controller
     {
         private readonly IOrganizationService _service;
 
