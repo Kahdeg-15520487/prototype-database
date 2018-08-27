@@ -11,7 +11,7 @@ run ```update-database```
 ### dotnet-cli  
 ```
 dotnet restore
-cd prototype.Startup
+cd prototype_database.Startup
 dotnet ef database update
 dotnet run
 ```
