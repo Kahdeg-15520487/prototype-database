@@ -35,6 +35,16 @@ namespace prototype_database.Startup
                         )
                 );
 
+            // For development
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
             services.AddUserService();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

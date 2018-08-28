@@ -180,7 +180,7 @@ namespace prototype_database.AppService.Services
             Organization org = _context.Organizations.FirstOrDefault(o => o.Id.Equals(orgid));
             if (org == null)
             {
-                throw new ArgumentException($"organization {id} does not exist");
+                throw new ArgumentException($"organization {orgid} does not exist");
             }
 
             //check all group exist
@@ -188,7 +188,7 @@ namespace prototype_database.AppService.Services
             {
                 if (_context.Groups.FirstOrDefault(gr => groupDto.Id.Equals(gr.Id.ToString())) == null)
                 {
-                    throw new ArgumentException($"group {groupDto} does not exist");
+                    throw new ArgumentException($"group {groupDto.Id} does not exist");
                 }
             }
 
@@ -197,7 +197,7 @@ namespace prototype_database.AppService.Services
             {
                 if (_context.Roles.FirstOrDefault(rl => roleDto.Id.Equals(rl.Id.ToString())) == null)
                 {
-                    throw new ArgumentException($"role {roleDto} does not exist");
+                    throw new ArgumentException($"role {roleDto.Id} does not exist");
                 }
             }
 
