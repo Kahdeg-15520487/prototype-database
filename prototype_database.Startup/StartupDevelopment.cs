@@ -64,6 +64,8 @@ namespace prototype_database.Startup
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseCors("CorsPolicy");
         }
     }
 }
