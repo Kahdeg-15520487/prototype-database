@@ -15,7 +15,7 @@ namespace prototype_database.Dal
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
-        public UserDbContext(DbContextOptions options) : base(options)
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
         }
 
@@ -36,81 +36,25 @@ namespace prototype_database.Dal
             }
         }
 
+        /// <summary>
+        /// seed data
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region organization
-            var RosenOrg = new Organization()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Rosen"
-            };
-            var UITOrg = new Organization()
-            {
-                Id = Guid.NewGuid(),
-                Name = "UIT"
-            };
+            var seedData = SeedData.Instance;
             Organization[] organizations = new Organization[]
             {
-                RosenOrg,UITOrg
+                seedData.RosenOrg,seedData.UITOrg
             };
-            #endregion
-
-            #region group
-            var RosenTechGroup = new Group()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Technical",
-                OrganizationId = RosenOrg.Id
-            };
-            var RosenHRGroup = new Group()
-            {
-                Id = Guid.NewGuid(),
-                Name = "HR",
-                OrganizationId = RosenOrg.Id
-            };
-
-            var UITSEGroup = new Group()
-            {
-                Id = Guid.NewGuid(),
-                Name = "SoftwareEngineer",
-                OrganizationId = UITOrg.Id
-            };
-            var UITCEGroup = new Group()
-            {
-                Id = Guid.NewGuid(),
-                Name = "ComputerEngineer",
-                OrganizationId = UITOrg.Id
-            };
-
             Group[] groups = new Group[]
             {
-                RosenTechGroup,RosenHRGroup,UITSEGroup,UITCEGroup
+                seedData.RosenTechGroup,seedData.RosenHRGroup,seedData.UITSEGroup,seedData.UITCEGroup
             };
-            #endregion
 
-            #region role
-
-            var TechLeadRole = new Role
-            {
-                Id = Guid.NewGuid(),
-                Name = "Technical Lead"
-            };
-            var EngineerRole = new Role
-            {
-                Id = Guid.NewGuid(),
-                Name = "Engineer"
-            };
-            var HRLeadRole = new Role
-            {
-                Id = Guid.NewGuid(),
-                Name = "HR Lead"
-            };
             Role[] roles = new Role[]
             {
-                TechLeadRole,HRLeadRole,EngineerRole
+                seedData.TechLeadRole,seedData.HRLeadRole,seedData.EngineerRole
             };
-
-            #endregion
 
             modelBuilder.Entity<Organization>().HasData(organizations);
             modelBuilder.Entity<Group>().HasData(groups);

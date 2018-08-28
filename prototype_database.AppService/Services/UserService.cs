@@ -12,7 +12,7 @@ using prototype_database.AppService.Utility;
 
 namespace prototype_database.AppService.Services
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly UserDbContext _context;
 

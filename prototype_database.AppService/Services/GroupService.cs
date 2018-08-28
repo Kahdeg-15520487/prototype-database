@@ -9,7 +9,7 @@ using prototype_database.AppService.Utility;
 
 namespace prototype_database.AppService.Services
 {
-    class GroupService : IGroupService
+    public class GroupService : IGroupService
     {
         private readonly UserDbContext _context;
 

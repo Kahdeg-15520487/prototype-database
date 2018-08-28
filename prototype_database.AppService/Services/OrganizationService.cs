@@ -9,7 +9,7 @@ using prototype_database.AppService.Utility;
 
 namespace prototype_database.AppService.Services
 {
-    class OrganizationService : IOrganizationService
+    public class OrganizationService : IOrganizationService
     {
         private readonly UserDbContext _context;
 
