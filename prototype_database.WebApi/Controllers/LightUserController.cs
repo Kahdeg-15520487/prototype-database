@@ -1,11 +1,12 @@
 ﻿using System;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using prototype_database.Contract;
 using prototype_database.Contract.DTOs;
 
 namespace prototype_database.WebApi.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Produces("application/json")]
     [Route("api/user/light")]
     public class LightUserController : Controller

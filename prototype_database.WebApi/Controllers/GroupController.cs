@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 using prototype_database.Contract;
 
 namespace prototype_database.WebApi.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class GroupController : Controller

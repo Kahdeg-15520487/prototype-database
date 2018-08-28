@@ -1,13 +1,14 @@
 ﻿using System;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using prototype_database.Contract;
 using prototype_database.Contract.DTOs;
 
 namespace prototype_database.WebApi.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Produces("application/json")]
-    [Route("api/user/full")]
+    [Route("api/user")]
     public class FullUserController : Controller
     {
         private readonly IUserService _service;
