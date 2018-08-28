@@ -107,8 +107,8 @@ namespace prototype_database.Dal.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("a316c1e5-5521-487a-8588-d5c8c0014467"), "Rosen" },
-                    { new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a"), "UIT" }
+                    { new Guid("c00af6d2-5c26-44cc-8414-dbb420d0f942"), "Rosen" },
+                    { new Guid("a7bd1b7b-1110-4c6c-9fd6-f47a9cc7fbda"), "UIT" }
                 });
 
             migrationBuilder.InsertData(
@@ -116,21 +116,40 @@ namespace prototype_database.Dal.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("6424b41c-136f-4347-ac47-18a672fad8e0"), "Technical Lead" },
-                    { new Guid("4b7a6ca9-03c0-4e2c-a856-f05e87a95e31"), "HR Lead" },
-                    { new Guid("03ffbf68-6df8-4ea5-a2b3-101e865d34a9"), "Engineer" }
+                    { new Guid("fa83781c-c13e-4b2a-a13b-cc557cfba720"), "Technical Lead" },
+                    { new Guid("77817bb6-2a22-4635-8dda-b820356ed8f9"), "HR Lead" },
+                    { new Guid("d1eb257f-9a58-4751-8a6d-a1f0ed91b3ba"), "Engineer" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "UserGroups",
+                columns: new[] { "Id", "GroupId", "IsMain", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("540ab5fc-4615-4cde-a284-cc9d9698a238"), new Guid("3777ec35-2393-4053-95ad-cc587d87a3e3"), true, "12345" },
+                    { new Guid("a2bc5162-d036-436e-9ac2-ab4571ec0694"), new Guid("ab2ace08-2daf-4422-9242-293025aab9f6"), false, "12345" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "Id", "IsMain", "RoleId", "UserId" },
+                values: new object[] { new Guid("d0bd5e70-f6b3-4671-b587-0a87995daf84"), true, new Guid("d1eb257f-9a58-4751-8a6d-a1f0ed91b3ba"), "12345" });
 
             migrationBuilder.InsertData(
                 table: "Groups",
                 columns: new[] { "Id", "Name", "OrganizationId" },
                 values: new object[,]
                 {
-                    { new Guid("3e88800d-17b1-4de3-aecc-a4a3960ff059"), "Technical", new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
-                    { new Guid("3776f864-6f67-4e75-b79b-8dc66ef1c79a"), "HR", new Guid("a316c1e5-5521-487a-8588-d5c8c0014467") },
-                    { new Guid("14c5836f-285b-4f10-b3c3-03f35aa84146"), "SoftwareEngineer", new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") },
-                    { new Guid("f13be28b-8509-408e-841d-03d900d73435"), "ComputerEngineer", new Guid("fcb82b85-8646-4ed4-a410-29ee0c03893a") }
+                    { new Guid("3777ec35-2393-4053-95ad-cc587d87a3e3"), "Technical", new Guid("c00af6d2-5c26-44cc-8414-dbb420d0f942") },
+                    { new Guid("ab2ace08-2daf-4422-9242-293025aab9f6"), "HR", new Guid("c00af6d2-5c26-44cc-8414-dbb420d0f942") },
+                    { new Guid("abba6119-b935-4870-9c06-be6b8872fb32"), "SoftwareEngineer", new Guid("a7bd1b7b-1110-4c6c-9fd6-f47a9cc7fbda") },
+                    { new Guid("f90317a4-a87c-4800-8d24-8e7c5e84073e"), "ComputerEngineer", new Guid("a7bd1b7b-1110-4c6c-9fd6-f47a9cc7fbda") }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Mobile", "OrganizationId", "Phone", "ProfileImage" },
+                values: new object[] { "12345", "{\"main\": \"em@email.com\",\"emails\": [\"em@email.com\",\"em@yahoo.com\"]}", "Minh", "Nguyen Le", "{\"main\": \"333444\",\"mobiles\": [\"333444\",\"555666\"]}", new Guid("c00af6d2-5c26-44cc-8414-dbb420d0f942"), "{\"main\": \"1234\",\"work\": [\"1234\",\"5678\"], \"private\": [\"91011\"]}", "image" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_OrganizationId",

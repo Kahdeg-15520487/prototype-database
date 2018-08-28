@@ -12,6 +12,9 @@ namespace prototype_database.Dal
         public readonly Organization RosenOrg, UITOrg;
         public readonly Group RosenTechGroup, RosenHRGroup, UITSEGroup, UITCEGroup;
         public readonly Role TechLeadRole, HRLeadRole, EngineerRole;
+        public readonly User User;
+        public readonly UserGroup[] UserGroups;
+        public readonly UserRole[] UserRoles;
 
         private static SeedData instance;
         public static SeedData Instance => instance ?? (instance = new SeedData());
@@ -75,6 +78,49 @@ namespace prototype_database.Dal
             {
                 Id = Guid.Parse("77817bb6-2a22-4635-8dda-b820356ed8f9"),
                 Name = "HR Lead"
+            };
+
+            #endregion
+
+            #region user
+            User = new User()
+            {
+                Id = "12345",
+                FirstName = "Minh",
+                LastName = "Nguyen Le",
+                OrganizationId = RosenOrg.Id,
+                ProfileImage = "image",
+                Email = "{\"main\": \"em@email.com\",\"emails\": [\"em@email.com\",\"em@yahoo.com\"]}",
+                Phone = "{\"main\": \"1234\",\"work\": [\"1234\",\"5678\"], \"private\": [\"91011\"]}",
+                Mobile = "{\"main\": \"333444\",\"mobiles\": [\"333444\",\"555666\"]}"
+            };
+
+            UserGroups = new UserGroup[]
+            {
+                new UserGroup()
+                {
+                     Id = Guid.Parse("540ab5fc-4615-4cde-a284-cc9d9698a238"),
+                      UserId = User.Id,
+                      GroupId = RosenTechGroup.Id,
+                      IsMain = true
+                },
+                new UserGroup()
+                {
+                    Id = Guid.Parse("a2bc5162-d036-436e-9ac2-ab4571ec0694"),
+                    UserId = User.Id,
+                    GroupId = RosenHRGroup.Id,
+                    IsMain = false
+                }
+            };
+            UserRoles = new UserRole[]
+            {
+                new UserRole()
+                {
+                    Id = Guid.Parse("d0bd5e70-f6b3-4671-b587-0a87995daf84"),
+                    UserId = User.Id,
+                    RoleId=EngineerRole.Id,
+                    IsMain = true
+                }
             };
 
             #endregion

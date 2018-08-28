@@ -41,20 +41,22 @@ namespace prototype_database.AppService.Services
 
             users = users.ConvertAll(user =>
             {
-                var groups = from gr in _context.Groups.Include(g => g.Organization)
-                             join usgr in _context.UserGroups on gr.Id equals usgr.GroupId
-                             join us in _context.Users on usgr.UserId equals us.Id
-                             select new { Group = gr, isMain = usgr.IsMain };
+                var groups =
+                    from gr in _context.Groups.Include(g => g.Organization)
+                    join usgr in _context.UserGroups on gr.Id equals usgr.GroupId
+                    where usgr.UserId.Equals(user.Id)
+                    select new { Group = gr, isMain = usgr.IsMain };
 
                 user.Groups = groups.Select(group => Mapper.Map(group.Group)).ToArray();
 
                 var mainGroup = groups.First(g => g.isMain).Group;
                 user.MainGroup = Mapper.Map(mainGroup);
 
-                var roles = from role in _context.Roles
-                            join usrl in _context.UserRoles on role.Id equals usrl.RoleId
-                            join us in _context.Users on usrl.UserId equals us.Id
-                            select new { role, isMain = usrl.IsMain };
+                var roles =
+                    from role in _context.Roles
+                    join usrl in _context.UserRoles on role.Id equals usrl.RoleId
+                    where usrl.UserId.Equals(user.Id)
+                    select new { role, isMain = usrl.IsMain };
 
                 user.Roles = roles.Select(role => Mapper.Map(role.role)).ToArray();
 
@@ -113,24 +115,28 @@ namespace prototype_database.AppService.Services
 
             var user = users[0];
 
-            var groups = from gr in _context.Groups.Include(g => g.Organization)
-                         join usgr in _context.UserGroups on gr.Id equals usgr.GroupId
-                         join us in _context.Users on usgr.UserId equals us.Id
-                         select new { Group = gr, isMain = usgr.IsMain };
+            var groups =
+                from gr in _context.Groups.Include(g => g.Organization)
+                join usgr in _context.UserGroups on gr.Id equals usgr.GroupId
+                where usgr.UserId.Equals(user.Id)
+                select new { Group = gr, isMain = usgr.IsMain };
+
+            var tt = groups.ToArray();
 
             user.Groups = groups.Select(gr => Mapper.Map(gr.Group)).ToArray();
 
             var mainGroup = groups.First(g => g.isMain).Group;
             user.MainGroup = Mapper.Map(mainGroup);
 
-            var roles = from role in _context.Roles
-                        join usrl in _context.UserRoles on role.Id equals usrl.RoleId
-                        join us in _context.Users on usrl.UserId equals us.Id
-                        select new { role, isMain = usrl.IsMain };
+            var roles =
+                from role in _context.Roles
+                join usrl in _context.UserRoles on role.Id equals usrl.RoleId
+                where usrl.UserId.Equals(user.Id)
+                select new { Role = role, isMain = usrl.IsMain };
 
-            user.Roles = roles.Select(role => Mapper.Map(role.role)).ToArray();
+            user.Roles = roles.Select(role => Mapper.Map(role.Role)).ToArray();
 
-            var mainRole = roles.First(r => r.isMain).role;
+            var mainRole = roles.First(r => r.isMain).Role;
             user.MainRole = Mapper.Map(mainRole);
 
             return user;

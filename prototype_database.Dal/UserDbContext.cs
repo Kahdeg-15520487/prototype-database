@@ -59,52 +59,9 @@ namespace prototype_database.Dal
             modelBuilder.Entity<Organization>().HasData(organizations);
             modelBuilder.Entity<Group>().HasData(groups);
             modelBuilder.Entity<Role>().HasData(roles);
-
-            #region user
-            /*
-            User user = new User()
-            {
-                Id = "123456",
-                FirstName = "First",
-                LastName = "Last",
-                OrganizationId = RosenOrg.Id,
-                ProfileImage = "image",
-                Email = "{\"main\": \"em@email.com\",\"emails\": [\"em@email.com\",\"em@yahoo.com\"]}",
-                Phone = "{\"main\": \"1234\",\"work\": [\"1234\",\"5678\"], \"private\": [\"91011\"]}",
-                Mobile = "{\"main\": \"333444\",\"mobiles\": [\"333444\",\"555666\"]}",
-            };
-            UserGroup[] userGroups = new UserGroup[]
-            {
-                new UserGroup()
-                {
-                     Id = Guid.NewGuid(),
-                      UserId = "123456",
-                      GroupId = RosenTechGroup.Id,
-                      IsMain = true
-                },
-                new UserGroup()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = "123456",
-                    GroupId = RosenHRGroup.Id,
-                    IsMain = false
-                }
-            };
-            UserRole[] userRoles = new UserRole[]
-            {
-                new UserRole()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = "123456",
-                    RoleId=EngineerRole.Id,
-                    IsMain = true
-                }
-            };
-            modelBuilder.Entity<User>().HasData(user);
-            modelBuilder.Entity<UserGroup>().HasData(userGroups);
-            modelBuilder.Entity<UserRole>().HasData(userRoles);
-            */
-            #endregion
+            modelBuilder.Entity<User>().HasData(seedData.User);
+            modelBuilder.Entity<UserGroup>().HasData(seedData.UserGroups);
+            modelBuilder.Entity<UserRole>().HasData(seedData.UserRoles);
 
             base.OnModelCreating(modelBuilder);
         }
